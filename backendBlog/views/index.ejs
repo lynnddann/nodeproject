@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/bootstrap/css/bootstrap.css' />
+     <script type="text/javascript" src="/bootstrap/js/jquery-1.11.0.js"></script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+  </head>
+  <body>
+    <%- include('./header.ejs',{title:"系统页面",isShow:true,welcomename:name}) %>
+    <div class="container">
+    	<%if(isEmpty){%>
+          <p>亲，您还没有注册店铺呢~，先<a href="/goods" >注册店铺</a>吧</p>
+      <%} else {%>
+        <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>卖家</th>
+                  <th>店铺名称</th>
+                  <th>店铺介绍</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <%for(var i = 0;i<list.length;i++){%>
+                      <tr>
+                          <td><%= list[i].sellor%></td>
+                          <td><a href="/shopdetail?id=<%= list[i]._id%>"><%= list[i].shopname%></a></td>
+                          <td class="td1"><%= list[i].content%></td>
+                          <td>
+                          <a class="btn btn-default" href="/goods/fixed?id=<%= list[i]._id%>" role="button">修改店铺内容</a>
+                          <a class="btn btn-default" href="/detail?id=<%= list[i].shopname%>" role="button">添加商品信息</a>
+                        <a class="btn btn-danger" href="/delete?id=<%= list[i]._id%>" role="button">删除</a></td>
+                      </tr>
+                  <%}%>
+              </tbody>
+            </table>
+         <%}%>
+      </div>
+      <script>
+          $(document).ready(function(){
+            //限制字符个数
+            $(".td1").each(function(){
+                var maxwidth=15;
+                if($(this).text().length>maxwidth){
+                    $(this).text($(this).text().substring(0,maxwidth));
+                    $(this).html($(this).html()+'...');
+                }
+            });
+         });
+
+      </script>
+  </body>
+</html>

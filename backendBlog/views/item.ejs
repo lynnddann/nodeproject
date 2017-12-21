@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/bootstrap/css/bootstrap.css' />
+     <script type="text/javascript" src="/bootstrap/js/jquery-1.11.0.js"></script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+  </head>
+  <style>
+  		img{
+  		display:block;
+  		width:100px;
+  		height:100px;
+  		}
+  </style>
+  <body>
+    <%- include('./header.ejs',{title:"商品详细页面",isShow:false}) %>
+    <div class="container">
+		<div class="panel panel-default">
+		  <!-- Default panel contents -->
+		  <div class="panel-heading"><span>商品名称:</span><%= info.title%></div>
+		  <div class="panel-body">
+		    <p>商品简介：<%= info.introduce%></p>
+		  </div>
+
+		  <!-- List group -->
+		  <ul class="list-group">
+		  <li class="list-group-item"><span>商品规格：</span><%= info.type%></li>
+		    <li class="list-group-item"><span>商品价格：</span><%= info.price%></li>
+		    <li class="list-group-item"><sapn>商品库存：</sapn><%= info.num%></li>
+		    <li class="list-group-item"><sapn style="float:left">商品图片：</sapn><img src="<%= info.pathname%>"/></li>
+		  </ul>
+		</div>
+		<a href="/goodsdetail?id=<%= info.shopname%>&limit=2&offset=0">返回商品列表</a>
+		<a href="/">返回首页</a>
+    </div>
+
+  </body>
+</html>

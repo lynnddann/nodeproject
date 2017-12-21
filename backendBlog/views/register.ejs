@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/bootstrap/css/bootstrap.css' />
+     <script type="text/javascript" src="/bootstrap/js/jquery-1.11.0.js"></script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>    
+  </head>
+  <style>
+  .box{
+     width:500px;
+        height:400px;
+        border:1px solid #ccc;
+        margin:0 auto;
+        border-radius: 10px;
+  }
+      form{
+        width:600px;
+        height:400px;
+       
+      }
+      p{
+        width:300px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 20px;
+      }
+     .form-control{
+      width:340px;
+      float: left;
+     }
+     span{
+      float: left;
+      line-height: 34px;
+      padding-left: 5px;
+     }
+  </style>
+  <body>
+    <%- include('./header.ejs',{title:"注册页面",isShow:false}) %>
+
+    <div class="box">
+    <p>已有账号，直接&nbsp;<a href="/login" >登录</a>&nbsp;哦~</p>
+    	<form class="form-horizontal" method="post" action="/register" onsubmit="return check()">
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="username" placeholder="6-20位数字字母或者汉字组合" name="username">
+            <span class="span1"></span>
+           <%if(isUser){%>
+              <span style="color:red">该用户名已经被注册过</span>
+           <%}%>
+          </div>
+        </div>
+       
+     
+
+        <div class="form-group">
+          <label for="inputPassword3" class="col-sm-2 control-label">邮箱</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" id="email" placeholder="邮箱" name="email">
+            <%if(isShow){%>
+              <span style="color:red">该邮箱已经被注册过</span>
+           <%}%>
+          </div>
+        </div>
+
+        
+
+        <div class="form-group">
+          <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="password" placeholder="6-20位字符，可使用字母，数字或符号的组合" name="password">
+            <span class="span2"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword3" class="col-sm-2 control-label">确认密码</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="password2" placeholder="请再次输入密码" name="password2">
+            <span class="span3"></span>
+          </div> 
+        </div>
+         
+        <%if(isNone){%>
+           <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <label style="color:red">每一项都必须填写</label>
+          </div>
+        </div>
+        <%}%>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10" id="box">
+              <button type="submit" class="btn btn-default" id="reg">注册</button>
+            </div>
+        </div
+      </form>
+    </div>
+    <script type="text/javascript" src="/javascripts/register.js"></script>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/bootstrap/css/bootstrap.css' />
+     <script type="text/javascript" src="/bootstrap/js/jquery-1.11.0.js"></script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+    <style>
+    	img{
+    		width:50px;
+    		height: 50px;
+    	}
+    	th{
+    		text-align: center;
+    	}
+    	td{
+    		text-align: center;  		
+    	}
+    </style>
+  </head>
+  <body>
+    <%- include('./header.ejs',{title:"商品列表信息",isShow:false}) %>
+	<div class="container table-responsive">
+
+	 <%if(isEmpty){%>
+        <p>亲，您的店铺还空空的哦~，快去<a href="/detail?id=<%= id%>">发布商品</a>吧!</p>
+    <%} else {%>
+
+	    <table class="table table-bordered  table-hover">
+	          <thead>
+	            <tr>
+	              <th>店铺名称</th>
+	              <th>商品图片</th>
+	              <th>商品名称</th>
+	              <th>商品介绍</th>
+	              <th>商品规格</th>
+	              <th>商品价格</th>
+	              <th>商品库存</th>
+	              <th>操作</th>
+	            </tr>
+	          </thead>
+	          <tbody>
+	              <%for(var i = 0;i<info[1].length;i++){%>
+	                  <tr>                 		  
+	                      <td style="vertical-align: middle;"><%= info[1][i].shopname%></td>
+	                      <td style="vertical-align: middle;"><img src="<%= info[1][i].pathname%>"/></td>
+	                      <td style="vertical-align: middle;"><a href="/goodsdetail/item?id=<%= info[1][i]._id%>"><%= info[1][i].title%></a></td>
+	                      <td style="vertical-align: middle;" class="td1"><%= info[1][i].introduce%></td>
+	                      <td style="vertical-align: middle;"><%= info[1][i].type%></td>
+	                      <td style="vertical-align: middle;"><%= info[1][i].price%></td>
+	                      <td style="vertical-align: middle;"><%= info[1][i].num%></td>
+	                      <td style="vertical-align: middle;">
+	                      	<a class="btn btn-default" href="/detail?id=<%= info[1][i].shopname%>" role="button">继续添加</a>
+	                      	<a class="btn btn-default" href="/detail/fixed?id=<%= info[1][i]._id%>" role="button">修改</a>
+                    <a class="btn btn-danger" href="/goodsdetail/deletegoods?id=<%= info[1][i]._id%>" role="button">删除</a>
+	                      <a class="btn btn-danger" href="/" role="button">返回首页</a>
+	                      </td>
+	                  </tr>
+	              <%}%>
+	          </tbody>
+        </table>
+         <nav aria-label="Page navigation" style="text-align:center;">
+          <ul class="pagination">
+            
+          <%for(var i = 0;i<info[0];i+=2){%>
+            <li>
+            <a href="/goodsdetail?id=<%= info[1][0].shopname%>&limit=2&offset=<%- ((i/2+1)-1)*2%>"><%- i/2+1%></a>
+            </li>
+          <%}%>
+    
+          </ul>
+        </nav>
+
+
+        <%}%>
+       
+
+
+
+    </div>
+    <script>
+         $(document).ready(function(){
+            //限制字符个数
+            $(".td1").each(function(){
+                var maxwidth=10;
+                if($(this).text().length>maxwidth){
+                    $(this).text($(this).text().substring(0,maxwidth));
+                    $(this).html($(this).html()+'...');
+                }
+            });
+         });
+ 
+    </script>
+    
+  </body>
+</html>
